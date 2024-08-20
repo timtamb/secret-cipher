@@ -20,7 +20,7 @@ function MyNavbar() {
 
     return (
         <nav className="w-screen absolute top-0 left-0 p-4 flex justify-between font-mono text-gray-700 dark:text-gray-200">
-            <h1 className="mx-auto text-2xl font-extrabold">_cryptograms_</h1>
+            <h1 className="mx-auto text-2xl font-extrabold">_secret_cipher_</h1>
             <div className="absolute right-0 top-0 h-full flex">
                 <button className="mr-4" onClick={handleClick}>
                     {darkMode ? <IoMoon /> : <IoSunny />}

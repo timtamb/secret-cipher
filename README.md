@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Secret Cipher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Use your deductive reasoning skills to decipher the encrypted messages!
+
+## Quick Start
+
+- install npm
+- run `npm start`
+- play
+
+This project was built using React and Tailwindcss.
 
 ## Available Scripts
 

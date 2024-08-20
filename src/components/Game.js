@@ -5,7 +5,6 @@ import Instructions from './Instructions';
 import GameEndScreen from './GameEndScreen';
 import LetterBoxList from './LetterBoxList';
 import Timer from './Timer';
-
 import { getRandomMessage, generateSubstitutionCipher, generateEncryptedMessage } from '../utils';
 
 

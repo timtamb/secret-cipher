@@ -50,6 +50,7 @@ const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, s
 
     const handleHintClick = () => {
         // randomly select a letter to fill
+        // iterates over userInputs until first incorrect character is found
         let indexToFill = Math.floor(Math.random() * message.length);
         const startingIndex = indexToFill;
         while (userInputs[indexToFill] === message.charAt(indexToFill) || message.charAt(indexToFill).match(/[a-z]/i) == null) {
@@ -84,6 +85,7 @@ const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, s
 
     const duplicatedUserInputs = calculateDuplicatedUserInputs();
     const words = encryptedMessage.split(' ');
+    // Gets the index of the first letter of each word for calculating later
     const wordStartingIndexes = [0].concat(words.map((value => word => value += word.length + 1)(0)));
 
     return (
