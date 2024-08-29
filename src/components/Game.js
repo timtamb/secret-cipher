@@ -59,17 +59,17 @@ export default function Game() {
     const renderGame = () => {
         let gameView = (
             <>
-            <LetterBoxList encryptedMessage={encryptedMessage} message={message} setHintsUsed={setHintsUsed} handleSubmit={handleSubmit} />
-            <Timer timerRef={timerRef} />
+                <LetterBoxList encryptedMessage={encryptedMessage} message={message} setHintsUsed={setHintsUsed} handleSubmit={handleSubmit} />
+                <Timer timerRef={timerRef} />
             </>
         )
         if (!gameActive) {
             gameView = (
                 <>
-                {gameEnd ? <GameEndScreen timestamp={result} hintsUsed={hintsUsed} /> : <Instructions />}
-                <button className='px-4 py-2 font-mono font-bold border-2 border-amber-950 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 dark:active:bg-amber-900' onClick={handleGameStart}>
-                    {gameEnd ? 'play again' : 'play'}
-                </button>
+                    {gameEnd ? <GameEndScreen timestamp={result} hintsUsed={hintsUsed} /> : <Instructions />}
+                    <button className='px-4 py-2 font-mono font-bold border-2 border-amber-950 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 dark:active:bg-amber-900' onClick={handleGameStart}>
+                        {gameEnd ? 'play again' : 'play'}
+                    </button>
                 </>
             )
         }

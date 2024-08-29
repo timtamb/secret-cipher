@@ -6,20 +6,6 @@ const LetterBox = memo(function LetterBox(props) {
         props.handleLetterClick(props.index);
     }
 
-    const handleKeyDown = (event) => {
-        if (event.keyCode >= 65 && event.keyCode <= 90) {
-            props.handleLetterInput(event.key.toLowerCase());
-            props.handleArrowMovement('ArrowRight');
-        } else if (event.key === 'Esc' || event.key === 'Backspace') {
-            props.handleLetterInput('');
-            props.handleArrowMovement('ArrowLeft');
-        } else if (event.key === 'Delete') {
-            props.handleLetterInput('');
-        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-            props.handleArrowMovement(event.key);
-        }
-    }
-
     const getLetterColour = () => {
         let color = ' text-gray-700 dark:text-gray-400';
         if (props.isDuplicated) {
@@ -55,7 +41,6 @@ const LetterBox = memo(function LetterBox(props) {
                             value={props.userInput || ''}
                             readOnly={true}
                             onClick={handleClick}
-                            onKeyDown={handleKeyDown}
                         />
                     </div>
                 </div>

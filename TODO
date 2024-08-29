@@ -1,3 +1,4 @@
 Todo:
+[x] move control handling to the game component so arrow key inputs are actioned even when letterbox objects are not selected
 [] make the game playable on iphone
 [] host it somewhere

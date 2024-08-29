@@ -1,29 +1,35 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useEffect, useCallback } from 'react';
 import WordBox from './WordBox';
 import LetterBox from './LetterBox';
 
 
 const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, setHintsUsed, handleSubmit }) {
     const [userInputs, setUserInputs] = useState(new Array(encryptedMessage.length).fill(''));
-    const [activeIndex, setActiveIndex] = useState(-1);
+    const [activeIndex, setActiveIndex] = useState(0);
     let activeLetter = encryptedMessage[activeIndex]
-
-    const handleLetterClick = useCallback((index) => {
-        setActiveIndex(index);
-    }, []);
 
     const handleArrowMovement = useCallback((move) => {
         // finds the next alphabet character in the direction specified by 'move' and highlights it.
         // move is 'ArrowLeft' or 'ArrowRight'
-        let newIndex = '';
-        newIndex = activeIndex;
-        while (newIndex > 0 && newIndex < encryptedMessage.length - 1) {
-            newIndex += (move === 'ArrowRight' ? 1 : -1)
-            if (encryptedMessage[newIndex].match(/[a-z]/i)) {
-                break;
+        let newIndex = activeIndex;
+        if (move === 'ArrowLeft') {
+            while (newIndex > 0) {
+                newIndex -= 1
+                if (encryptedMessage[newIndex].match(/[a-z]/i)) {
+                    setActiveIndex(newIndex);
+                    return
+                }
+            }
+
+        } else {
+            while (newIndex < encryptedMessage.length - 1) {
+                newIndex += 1
+                if (encryptedMessage[newIndex].match(/[a-z]/i)) {
+                    setActiveIndex(newIndex);
+                    return
+                }
             }
         }
-        setActiveIndex(newIndex);
     }, [activeIndex, encryptedMessage]);
 
     const handleLetterInput = useCallback((letter) => {
@@ -31,9 +37,34 @@ const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, s
         setUserInputs(updatedInputs);
     }, [activeLetter, encryptedMessage, userInputs]);
 
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.keyCode >= 65 && event.keyCode <= 90) {
+                handleLetterInput(event.key.toLowerCase());
+                handleArrowMovement('ArrowRight');
+            } else if (event.key === 'Esc' || event.key === 'Backspace') {
+                handleLetterInput('');
+                handleArrowMovement('ArrowLeft');
+            } else if (event.key === 'Delete') {
+                handleLetterInput('');
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                handleArrowMovement(event.key);
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        };
+    }, [handleArrowMovement, handleLetterInput]);
+
+    const handleLetterClick = useCallback((index) => {
+        setActiveIndex(index);
+    }, []);
+
     const handleClearClick = () => {
         setUserInputs([]);
-        setActiveIndex(-1);
+        setActiveIndex(0);
         activeLetter = '';
     };
 
@@ -104,8 +135,6 @@ const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, s
                                 isDuplicated={duplicatedUserInputs.includes(userInputs[letterIndex])}
                                 userInput={userInputs[letterIndex]}
                                 handleLetterClick={handleLetterClick}
-                                handleLetterInput={handleLetterInput}
-                                handleArrowMovement={handleArrowMovement}
                             />
                         })}
                     </WordBox>
