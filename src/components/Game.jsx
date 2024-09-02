@@ -9,12 +9,12 @@ import { getRandomMessage, generateSubstitutionCipher, generateEncryptedMessage 
 
 
 export default function Game() {
-    const [gameActive, setGameActive] = useState(false)
-    const [gameEnd, setGameEnd] = useState(false)
+    const [gameActive, setGameActive] = useState(false);
+    const [gameEnd, setGameEnd] = useState(false);
     const [message, setMessage] = useState('');
     const [encryptedMessage, setEncryptedMessage] = useState('');
-    const [result, setResult] = useState(0)
-    const [hintsUsed, setHintsUsed] = useState(0)
+    const [result, setResult] = useState(0);
+    const [hintsUsed, setHintsUsed] = useState(0);
     const timerRef = useRef(null);
     const fireworksRef = useRef(null);
 
@@ -52,10 +52,10 @@ export default function Game() {
                 redirect: "follow"
             };
             const response = await fetch('http://127.0.0.1:8000/api/get_random_quote/', requestOptions);
-            return response.json()
+            return response.json();
         } catch (error) {
             // As a fallback, return one of the hardcoded quotes in utils
-            console.log('ERROR:', error.message)
+            console.log('ERROR:', error.message);
             return getRandomMessage();
         }
     }

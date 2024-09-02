@@ -1,4 +1,12 @@
 Todo:
+[] add alert confirmation when clicking new puzzle
+[] work out how to store basic data in the browser (e.g. store light/dark mode selection)
+[] add authentication
+    [] store basic stats (e.g. best time, puzzles solved, etc)
+[] make the game playable on iphone
+[] host it somewhere
+
+Completed
 [x] move control handling to the game component so arrow key inputs are actioned even when letterbox objects are not selected
 [x] create backend using Django
 [x] hook into an API that returns random quotes
@@ -6,9 +14,3 @@ Todo:
 [x] add handling for semicolon and colon
 [x] fix padding of letter boxes
 [x] add new puzzle button
-[] add alert confirmation when clicking new puzzle
-[] work out how to store basic data in the browser (e.g. store light/dark mode selection)
-[] add authentication
-    [] store basic stats (e.g. best time, puzzles solved, etc)
-[] make the game playable on iphone
-[] host it somewhere
