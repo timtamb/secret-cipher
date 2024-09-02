@@ -24,7 +24,7 @@ const LetterBox = memo(function LetterBox(props) {
         return color;
     }
 
-    if ([',', '.', '?', '\''].includes(props.letter)) {
+    if ([',', '.', '?', "'", ':', ';', '!'].includes(props.letter)) {
         return (
             <div className={'h-12 w-6 flex justify-center items-center text-3xl' + getLetterColour()}>
                 <p className='w-6 bg-inherit focus:outline-none caret-transparent'>{props.letter}</p>
@@ -36,7 +36,7 @@ const LetterBox = memo(function LetterBox(props) {
                 <div className={'border-2 border-gray-700 dark:border-gray-500 hover:bg-amber-600' + getBackgroundColour()}>
                     <div className='h-12 w-6 flex justify-center items-center text-3xl'>
                         <input
-                            className='w-6 text-center bg-inherit focus:outline-none hover:cursor-pointer caret-transparent'
+                            className='h-full w-6 text-center bg-inherit focus:outline-none hover:cursor-pointer caret-transparent'
                             type='text'
                             value={props.userInput || ''}
                             readOnly={true}

@@ -45,8 +45,23 @@ export default function Game() {
         }
     }, [message]);
 
-    const handleGameStart = () => {
-        const messageToEncrypt = getRandomMessage();
+    const fetchRandomMessage = async () => {
+        try {
+            const requestOptions = {
+                method: "GET",
+                redirect: "follow"
+            };
+            const response = await fetch('http://127.0.0.1:8000/api/get_random_quote/', requestOptions);
+            return response.json()
+        } catch (error) {
+            // As a fallback, return one of the hardcoded quotes in utils
+            console.log('ERROR:', error.message)
+            return getRandomMessage();
+        }
+    }
+
+    const handleGameStart = async () => {
+        let messageToEncrypt = await fetchRandomMessage();
         setMessage(messageToEncrypt);
         const encMessage = generateEncryptedMessage(generateSubstitutionCipher(), messageToEncrypt);
         setEncryptedMessage(encMessage);
@@ -59,7 +74,7 @@ export default function Game() {
     const renderGame = () => {
         let gameView = (
             <>
-                <LetterBoxList encryptedMessage={encryptedMessage} message={message} setHintsUsed={setHintsUsed} handleSubmit={handleSubmit} />
+                <LetterBoxList encryptedMessage={encryptedMessage} message={message} setHintsUsed={setHintsUsed} handleSubmit={handleSubmit} handleGameStart={handleGameStart} />
                 <Timer timerRef={timerRef} />
             </>
         )

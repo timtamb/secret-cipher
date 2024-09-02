@@ -3,7 +3,7 @@ import WordBox from './WordBox';
 import LetterBox from './LetterBox';
 
 
-const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, setHintsUsed, handleSubmit }) {
+const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, setHintsUsed, handleSubmit, handleGameStart }) {
     const [userInputs, setUserInputs] = useState(new Array(encryptedMessage.length).fill(''));
     const [activeIndex, setActiveIndex] = useState(0);
     let activeLetter = encryptedMessage[activeIndex]
@@ -143,7 +143,8 @@ const LetterBoxList = memo(function LetterBoxList({ encryptedMessage, message, s
             <div className='flex flex-row'>
                 <button onClick={handleSubmitClick} className='mt-6 mr-6 px-3 py-2 border-2 border-green-950 bg-green-500 hover:bg-green-600 active:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800 dark:active:bg-green-900'>submit</button>
                 <button onClick={handleHintClick} className='mt-6 mr-6 px-3 py-2 border-2 border-amber-950 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-800 dark:active:bg-amber-900'>hint</button>
-                <button onClick={handleClearClick} className='mt-6 px-3 py-2 border-2 border-gray-900 bg-gray-400 hover:bg-gray-500 active:bg-gray-600 dark:bg-gray-500 dark:hover:bg-gray-600 dark:active:bg-gray-700'>clear</button>
+                <button onClick={handleClearClick} className='mt-6 mr-6 px-3 py-2 border-2 border-gray-900 bg-gray-400 hover:bg-gray-500 active:bg-gray-600 dark:bg-gray-500 dark:hover:bg-gray-600 dark:active:bg-gray-700'>clear</button>
+                <button onClick={() => window.location.reload()} className='mt-6 px-3 py-2 border-2 border-gray-900 bg-gray-400 hover:bg-gray-500 active:bg-gray-600 dark:bg-gray-500 dark:hover:bg-gray-600 dark:active:bg-gray-700'>new puzzle</button>
             </div>
         </>
     )
